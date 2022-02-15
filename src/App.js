@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import NewUser from "./components/NewUser";
+import UserList from "./components/UserList";
+const dummy = [];
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+  const [userInputList, setUserInputList] = useState(dummy);
+  const onUserDataInput = (dataInput) => {
+    setUserInputList((prevData) => {
+      return [dataInput, ...prevData];
+    });
+  };
+  let userDisplay = (
+    <div className="user-list">
+      <h2>No User Data Found!</h2>
     </div>
   );
-}
+
+  if (userInputList.length > 0) {
+        userDisplay=(userInputList.map((user) => (
+          <UserList totalUserData={userInputList} uName={user.name} key={user.id} uAge={user.age} />
+        )));
+    ;
+  }
+
+  return (
+    <div>
+      <div>
+        <NewUser userInput={onUserDataInput} />
+      </div>
+      <div>
+        {userDisplay}
+        ;
+      </div>
+    </div>
+  );
+};
 
 export default App;
