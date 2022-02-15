@@ -18,10 +18,14 @@ const App = () => {
   );
 
   if (userInputList.length > 0) {
-        userDisplay=(userInputList.map((user) => (
-          <UserList totalUserData={userInputList} uName={user.name} key={user.id} uAge={user.age} />
-        )));
-    ;
+    userDisplay = userInputList.map((user) => (
+      <UserList
+        totalUserData={userInputList}
+        uName={user.name}
+        key={user.id}
+        uAge={user.age}
+      />
+    ));
   }
 
   return (
@@ -29,10 +33,7 @@ const App = () => {
       <div>
         <NewUser userInput={onUserDataInput} />
       </div>
-      <div>
-        {userDisplay}
-        ;
-      </div>
+      <div>{userDisplay};</div>
     </div>
   );
 };

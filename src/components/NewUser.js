@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ErrorModal from "./ErrorModal";
 
 import "./NewUser.css";
 
@@ -37,25 +38,12 @@ const NewUser = (props) => {
   };
   const okHandler = () => {
     setError(false);
-  }
+  };
 
   return (
     <div>
-      { error &&
-        <div className="backdrop">
-          <div className="modal">
-            <header className="header">
-              <h2>Invalid Input</h2>
-            </header>
-            <div className="content">
-              <p>Please Enter correct Values!</p>
-            </div>
-            <footer className="actions">
-              <button onClick={okHandler}>OK</button>
-            </footer>
-          </div>
-        </div>
-      }
+      {error && ( <ErrorModal onOkHandler={okHandler} />
+      )}
       <form className="new-user" onSubmit={submitHandler}>
         <div>
           <label>User Name</label>
