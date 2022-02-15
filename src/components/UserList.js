@@ -1,12 +1,27 @@
 import React from "react";
 import "./UserList.css";
 
-const NewUser = (props) => {
-  return (
-    <ul className="user-list">
-      <h2>{`${props.uName} (${props.uAge} Years old)`}</h2>
+const UserList = (props) => {
+
+  let userDisplay = (
+    <div className="user-list">
+      <h2>No User Data Found!</h2>
+    </div>
+  );
+
+  if (props.onUserInputList.length > 0) {
+    userDisplay = props.onUserInputList.map((user) => (
+      <ul className="user-list">
+      <h2>{`${user.name} (${user.age} Years old)`}</h2>
     </ul>
+    ));
+  }
+
+  return (
+    <div>
+      {userDisplay}
+    </div>
   );
 };
 
-export default NewUser;
+export default UserList;

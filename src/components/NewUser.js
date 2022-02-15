@@ -42,8 +42,7 @@ const NewUser = (props) => {
 
   return (
     <div>
-      {error && ( <ErrorModal onOkHandler={okHandler} />
-      )}
+      {error && <ErrorModal onOkHandler={okHandler} />}
       <form className="new-user" onSubmit={submitHandler}>
         <div>
           <label>User Name</label>
