@@ -3,7 +3,7 @@ import "./ErrorModal.css";
 
 const ErrorModal = (props) => {
   return (
-    <div className="backdrop">
+    <div onClick={props.onOkHandler} className="backdrop">
       <div className="modal">
         <header className="header">
           <h2>Invalid Input</h2>

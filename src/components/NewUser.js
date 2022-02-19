@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ErrorModal from "./ErrorModal";
 
 import "./NewUser.css";
 
 const NewUser = (props) => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
   const [error, setError] = useState();
-
-  const nameChangeHandler = (event) => {
-    setEnteredName(event.target.value);
-  };
-
-  const ageChangeHandler = (event) => {
-    setEnteredAge(event.target.value);
-  };
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    const enteredName = nameInputRef.current.value;
+
+    const enteredAge = ageInputRef.current.value;
     if (
       enteredName.trim().length === 0 ||
       enteredAge.trim().length === 0 ||
-      enteredAge <= 0
+      enteredAge <= 0 || enteredAge > 100
     ) {
       setError(true);
       return;
@@ -32,9 +28,9 @@ const NewUser = (props) => {
       name: enteredName,
       age: enteredAge,
     };
-    setEnteredName("");
-    setEnteredAge("");
     props.userInput(usersData);
+    nameInputRef.current.value ='';
+    ageInputRef.current.value ='';
   };
   const okHandler = () => {
     setError(false);
@@ -48,11 +44,7 @@ const NewUser = (props) => {
           <label>User Name</label>
         </div>
         <div>
-          <input
-            type="text"
-            value={enteredName}
-            onChange={nameChangeHandler}
-          ></input>
+          <input type="text" ref={nameInputRef}></input>
         </div>
         <div>
           <label>Age(Years)</label>
@@ -60,11 +52,7 @@ const NewUser = (props) => {
         <div>
           <input
             type="number"
-            value={enteredAge}
-            onChange={ageChangeHandler}
-            min="1"
-            step="1"
-            max="100"
+            ref={ageInputRef}
           ></input>
         </div>
         <div>
